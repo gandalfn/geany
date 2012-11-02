@@ -1065,8 +1065,16 @@ void document_apply_indent_settings(GeanyDocument *doc)
 
 void document_show_tab(GeanyDocument *doc)
 {
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(main_widgets.notebook),
-		document_get_notebook_page(doc));
+	const int current = gtk_notebook_get_current_page (GTK_NOTEBOOK(main_widgets.notebook));
+	const int num = document_get_notebook_page(doc);
+	if (current != num)
+	{
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(main_widgets.notebook), num);
+	}
+	else
+	{
+		g_signal_emit_by_name(geany_object, "document-activate", doc);
+	}
 }
 
 
