@@ -108,6 +108,8 @@
 	geany_functions->p_editor->editor_find_snippet
 #define editor_insert_snippet \
 	geany_functions->p_editor->editor_insert_snippet
+#define editor_get_default_selection \
+	geany_functions->p_editor->editor_get_default_selection
 #define scintilla_send_message \
 	geany_functions->p_scintilla->scintilla_send_message
 #define scintilla_new \
@@ -432,5 +434,9 @@
 	geany_functions->p_build->build_set_menu_item
 #define build_get_group_count \
 	geany_functions->p_build->build_get_group_count
+#define vte_cwd \
+	geany_functions->p_vte->vte_cwd
+#define vte_send_cmd \
+	geany_functions->p_vte->vte_send_cmd
 
 #endif

@@ -46,6 +46,7 @@
 #include "prefs.h"
 #include "geanywraplabel.h"
 /* #include "build.h" included in plugindata.h so it can use enums */
+#include "vte.h"
 #include "encodings.h"
 #include "search.h"
 #include "highlighting.h"
@@ -130,7 +131,8 @@ static EditorFuncs editor_funcs = {
 	&editor_get_eol_char_mode,
 	&editor_goto_pos,
 	&editor_find_snippet,
-	&editor_insert_snippet
+	&editor_insert_snippet,
+	&editor_get_default_selection
 };
 
 static ScintillaFuncs scintilla_funcs = {
@@ -361,6 +363,12 @@ static BuildFuncs build_funcs = {
 	&build_get_group_count
 };
 
+static VteFuncs vte_funcs = {
+	&vte_cwd,
+	&vte_send_cmd
+};
+
+
 static GeanyFunctions geany_functions = {
 	&doc_funcs,
 	&sci_funcs,
@@ -384,7 +392,8 @@ static GeanyFunctions geany_functions = {
 	&msgwin_funcs,
 	&stash_funcs,
 	&symbols_funcs,
-	&build_funcs
+	&build_funcs,
+	&vte_funcs
 };
 
 static GeanyData geany_data;

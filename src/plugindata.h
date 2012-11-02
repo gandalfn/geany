@@ -277,6 +277,7 @@ typedef struct GeanyFunctions
 	struct StashFuncs			*p_stash;			/**< See stash.h */
 	struct SymbolsFuncs			*p_symbols;			/**< See symbols.h */
 	struct BuildFuncs			*p_build;			/**< See build.h */
+	struct VteFuncs				*p_vte;				/**< See vte.h */
 }
 GeanyFunctions;
 
@@ -635,6 +636,8 @@ typedef struct EditorFuncs
 
 	const gchar* (*editor_find_snippet) (struct GeanyEditor *editor, const gchar *snippet_name);
 	void	(*editor_insert_snippet) (struct GeanyEditor *editor, gint pos, const gchar *snippet);
+
+	gchar* (*editor_get_default_selection) (GeanyEditor *editor, gboolean use_current_word, const gchar *wordchars);
 }
 EditorFuncs;
 
@@ -725,6 +728,14 @@ typedef struct BuildFuncs
 	guint (*build_get_group_count)(const GeanyBuildGroup grp);
 }
 BuildFuncs;
+
+/* See vte.h */
+typedef struct VteFuncs
+{
+	void		(*vte_cwd) (const gchar *filename, gboolean force);
+	gboolean	(*vte_send_cmd) (const gchar *cmd);
+}
+VteFuncs;
 
 /* Deprecated aliases */
 #ifndef GEANY_DISABLE_DEPRECATED
